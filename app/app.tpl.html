@@ -11,9 +11,11 @@
                 Items
             </header>
             <form name="itemForm" class="new-item-wrap wrap-padding" ng-submit="$ctrl.addItem(); $ctrl.resetForm(itemForm);" novalidate>
-                <input name="item" type="text" class="new-item" placeholder="Type name here..." 
-                ng-model="$ctrl.newItem" ng-blur="$ctrl.resetForm(itemForm)" required>
-                <button type="submit" class="add-btn" ng-disabled="itemForm.$invalid">Add new</button>
+                <div class="new-item-content">
+                    <input name="item" type="text" class="new-item" placeholder="Type name here..." 
+                    ng-model="$ctrl.newItem" ng-blur="$ctrl.resetForm(itemForm)" required>
+                    <button type="submit" class="add-btn" ng-disabled="itemForm.$invalid">Add new</button>
+                </div>
                 <div ng-show="itemForm.item.$invalid && !itemForm.item.$pristine" class="error-msg">Item name can not be empty.</div>
             </form>
             <section>

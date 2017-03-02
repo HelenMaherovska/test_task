@@ -77,6 +77,11 @@ body {
     margin-top: 18px;
 }
 
+.new-item-content {
+    width: 100%;
+    display: flex;
+}
+
 .new-item,
 .add-btn,
 .delete-btn {
