@@ -1,0 +1,56 @@
+<div class="page-wrap">
+    <nav class="nav">
+        <div class="menu-title">Main</div>
+        <ul>
+            <li class="menu">Overview</li>
+        </ul>
+    </nav>
+    <article class="content-wrap">
+        <section class="items-section">
+            <header class="title wrap-padding">
+                Items
+            </header>
+            <form name="itemForm" class="new-item-wrap wrap-padding" ng-submit="$ctrl.addItem(); $ctrl.resetForm(itemForm);" novalidate>
+                <input name="item" type="text" class="new-item" placeholder="Type name here..." 
+                ng-model="$ctrl.newItem" ng-blur="$ctrl.resetForm(itemForm)" required>
+                <button type="submit" class="add-btn" ng-disabled="itemForm.$invalid">Add new</button>
+                <div ng-show="itemForm.item.$invalid && !itemForm.item.$pristine" class="error-msg">Item name can not be empty.</div>
+            </form>
+            <section>
+                <div class="item" ng-repeat="item in $ctrl.items" 
+                   ng-class="$index === $ctrl.ativeIndex ? 'active' : ''"
+                   ng-click="$ctrl.ativeIndex = $index">
+                    <div class="item-inner">
+                        <p class="item-name">
+                            {{ item.name }}
+                            <span class="comm-count">{{ item.comments.length }}</span>
+                        </p>
+                        <button type="button" class="delete-btn" ng-click="$ctrl.deleteItem($index)">Delete</button>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="comments-section">
+            <header class="title">
+                Comments #{{ $ctrl.ativeIndex + 1 }}
+            </header>
+            <section class="comments-wrap">
+                <div class="comment" ng-repeat="comment in $ctrl.items[$ctrl.ativeIndex].comments">
+                    <div class="user-img"></div>
+                    <div class="comment-text">
+                        {{ comment.content }}
+                    </div>
+                    <img src="img/delete.png" alt="" class="delete-comm" ng-click="$ctrl.deleteComment($index)">
+                </div>
+            </section>
+            <form name="commentForm" class="comment" novalidate>
+                <div class="user-img"></div>
+                <textarea name="comment" class="comment-text new-comment" placeholder="New comment..."
+                    ng-model="$ctrl.newComment" ng-enter="$ctrl.addComment(commentForm)" 
+                    ng-blur="$ctrl.resetForm(commentForm)" required>
+                </textarea>
+                <div ng-show="commentForm.$invalid && commentForm.comment.$dirty" class="error-msg">Comment can not be empty.</div>
+            </form>
+        </section>
+    </article>
+</div>
